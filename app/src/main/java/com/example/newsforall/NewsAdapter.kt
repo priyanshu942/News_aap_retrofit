@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import java.util.zip.Inflater
 
-class NewsAdapter(val context: Context,val article: List<Article>):
-    RecyclerView.Adapter<NewsAdapter.newsView>() {
+class NewsAdapter(val context: Context,val article: List<Article>):RecyclerView.Adapter<NewsAdapter.newsView>() {
 
     class newsView(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val newsImage=itemView.findViewById<ImageView>(R.id.newsimage)
