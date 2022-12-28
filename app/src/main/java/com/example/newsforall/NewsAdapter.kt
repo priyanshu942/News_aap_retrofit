@@ -1,6 +1,7 @@
 package com.example.newsforall
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -33,9 +34,12 @@ class NewsAdapter(val context: Context,val article: List<Article>):RecyclerView.
         holder.decription.text=arti.description
         Glide.with(context).load(arti.urlToImage).into(holder.newsImage)
         holder.itemView.setOnClickListener {
-            val builder= CustomTabsIntent.Builder()
-            val customtab=builder.build()
-            customtab.launchUrl(context, Uri.parse(arti.url))
+//            val builder= CustomTabsIntent.Builder()
+//            val customtab=builder.build()
+//            customtab.launchUrl(context, Uri.parse(arti.url))
+           val intent=Intent(context,Detail::class.java)
+            intent.putExtra("URL",arti.url)
+            context.startActivity(intent)
 
         }
 

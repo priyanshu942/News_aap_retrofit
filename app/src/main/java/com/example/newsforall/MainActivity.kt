@@ -16,6 +16,9 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     lateinit var adapter: NewsAdapter
+    var page=1
+    var totalresult=-1
+    var Tag="Oew"
     private var list= mutableListOf<Article>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +33,14 @@ class MainActivity : AppCompatActivity() {
         val smartpage=SmartPagerSnapHelper()
         recycleView.layoutManager=layoutmanager
         smartpage.attachToRecyclerView(recycleView)
-
+//        Log.d(Tag, "total-- ${layoutmanager.itemCount}")
+//        Log.d(Tag,"first item --${layoutmanager.getFirstVisibleItemPosition}")
         fetchdata()
 
     }
     private fun fetchdata()
     {
-        val news =getdata.NewsService.instance.data("in",1)
+        val news =getdata.NewsService.instance.data("in",page)
 
         news.enqueue(object : Callback<Newdata?> {
 
@@ -47,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Newdata?>, response: Response<Newdata?>) {
                 val News=response.body()
                 if(News!=null) {
+                    totalresult=News.totalResults
                     Log.d("CHESSYCODE", News.toString())
                     list.addAll(News.articles)
                     adapter.notifyDataSetChanged()
